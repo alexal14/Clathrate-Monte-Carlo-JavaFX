@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.input.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="874.0" prefWidth="1238.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulation.view.RootLayoutController">
+   <children>
+      <MenuBar prefHeight="29.0" prefWidth="1167.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Quit">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#showAboutDialog" text="About">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.23867313915857605" layoutY="29.0" prefHeight="722.0" prefWidth="1167.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ToolBar fx:id="toolBarEnsemble" prefHeight="40.0" prefWidth="262.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <items>
+                        <RadioButton fx:id="radiobtnNVT" focusTraversable="false" mnemonicParsing="false" text="NVT">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleGroupEnsemble" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="radiobtnNPT" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" selected="true" text="NPT" toggleGroup="$toggleGroupEnsemble" />
+                     </items>
+                  </ToolBar>
+                  <Label layoutX="10.0" layoutY="284.0" text="Number of MC steps" />
+                  <TextField fx:id="textfieldNumbOfMCSteps" layoutX="167.0" layoutY="279.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="10.0" />
+                  <Separator layoutY="317.0" prefHeight="3.0" prefWidth="282.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Label layoutX="14.0" layoutY="327.0" text="Simulation Progress:" />
+                  <Label layoutX="17.0" layoutY="168.0" text="Water" />
+                  <Label layoutX="16.0" layoutY="200.0" text="Hyrdogen" />
+                  <Label layoutX="17.0" layoutY="232.0" text="Promoter" />
+                  <Separator layoutY="265.0" prefHeight="3.0" prefWidth="282.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Label fx:id="lblSimulationProgress" layoutX="14.0" layoutY="351.0" text="X out of Y" />
+                  <HBox layoutX="16.0" layoutY="375.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="31.0" />
+                  <AnchorPane layoutY="375.0" prefHeight="68.0" prefWidth="282.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <ProgressBar fx:id="progressBarSimulation" layoutX="14.0" layoutY="4.0" prefHeight="20.0" prefWidth="186.0" progress="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="82.0" />
+                        <ProgressIndicator fx:id="progressIndicatorSimulation" layoutX="224.0" layoutY="1.0" progress="0.0" AnchorPane.rightAnchor="23.0" />
+                        <Button fx:id="btnSimulationRun" layoutX="14.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleBtnRun" text="Run">
+                           <tooltip>
+                              <Tooltip text="Start Simulation" />
+                           </tooltip></Button>
+                        <Button fx:id="btnSimulationStop" layoutX="69.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleBtnStop" text="Stop">
+                           <tooltip>
+                              <Tooltip text="Terminate Simulation" />
+                           </tooltip></Button>
+                     </children>
+                  </AnchorPane>
+                  <Separator layoutY="450.0" prefHeight="3.0" prefWidth="282.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <AnchorPane layoutY="40.0" prefHeight="117.0" prefWidth="282.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Temperature, K" />
+                        <Label layoutX="15.0" layoutY="48.0" text="Pressure, kbars" />
+                        <Label layoutX="14.0" layoutY="84.0" text="Frequency of outputs" />
+                        <TextField fx:id="textfieldTemperature" layoutX="167.0" layoutY="9.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="7.0" />
+                        <TextField fx:id="textfieldPressure" layoutX="167.0" layoutY="43.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="7.0" />
+                        <TextField fx:id="textfieldFrequency" layoutX="167.0" layoutY="77.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="7.0" />
+                        <Separator layoutX="-53.0" layoutY="113.0" prefHeight="3.0" prefWidth="282.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <ComboBox fx:id="comboboxWater" layoutX="168.0" layoutY="163.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="6.0" />
+                  <ComboBox fx:id="comboboxHydrogen" layoutX="168.0" layoutY="195.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="6.0" />
+                  <ComboBox fx:id="comboboxPromoter" layoutX="168.0" layoutY="227.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="6.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane dividerPositions="0.7892857142857143" layoutX="174.0" layoutY="410.0" orientation="VERTICAL" prefHeight="720.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <SplitPane dividerPositions="0.6655629139072847" layoutX="612.0" layoutY="286.0" prefHeight="555.0" prefWidth="908.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <ToolBar prefHeight="40.0" prefWidth="599.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                                <ToggleButton fx:id="tglbtnBox" mnemonicParsing="false" onAction="#handleBtnBox" text="Show Box" />
+                                                <ToggleButton fx:id="getTglBtnPerspective" layoutX="233.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleBtnPerspective" selected="true" text="Show Perspective" />
+                                            </items>
+                                          </ToolBar>
+                                          <BorderPane fx:id="borderPaneJMol" layoutY="40.0" prefHeight="513.0" prefWidth="599.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <TabPane layoutX="66.0" layoutY="141.0" prefHeight="616.0" prefWidth="318.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <tabs>
+                                              <Tab text="Equilibration Graphs">
+                                                   <content>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0">
+                                                         <children>
+                                                            <LineChart fx:id="lineChartPotentialEnergy" legendVisible="false" prefHeight="218.0" prefWidth="318.0">
+                                                              <xAxis>
+                                                                <NumberAxis side="BOTTOM" fx:id="xAxisPotEn" />
+                                                              </xAxis>
+                                                              <yAxis>
+                                                                <NumberAxis fx:id="yAxisPotEn" side="LEFT" />
+                                                              </yAxis>
+                                                            </LineChart>
+                                                            <LineChart fx:id="lineChartDensity" legendVisible="false" prefHeight="202.0" prefWidth="318.0">
+                                                              <xAxis>
+                                                                <NumberAxis side="BOTTOM" fx:id="xAxisDens" />
+                                                              </xAxis>
+                                                              <yAxis>
+                                                                <NumberAxis fx:id="yAxisDens" side="LEFT" />
+                                                              </yAxis>
+                                                            </LineChart>
+                                                            <LineChart fx:id="lineChartBox" legendVisible="false" prefHeight="224.0" prefWidth="318.0">
+                                                              <xAxis>
+                                                                <NumberAxis side="BOTTOM" fx:id="xAxisBox" />
+                                                              </xAxis>
+                                                              <yAxis>
+                                                                <NumberAxis fx:id="yAxisBox" side="LEFT" />
+                                                              </yAxis>
+                                                            </LineChart>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                              </Tab>
+                                              <Tab text="Structure Graphs">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox layoutX="86.0" layoutY="123.0" prefHeight="583.0" prefWidth="318.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <LineChart fx:id="lineChartRDF" legendVisible="false" prefHeight="306.0" prefWidth="318.0">
+                                                                    <xAxis>
+                                                                      <NumberAxis side="BOTTOM" fx:id="xAxisRDF" />
+                                                                    </xAxis>
+                                                                    <yAxis>
+                                                                      <NumberAxis fx:id="yAxisRDF" side="LEFT" />
+                                                                    </yAxis>
+                                                                  </LineChart>
+                                                                  <LineChart fx:id="lineChartParticleDistrib" legendVisible="false" prefHeight="321.0" prefWidth="318.0">
+                                                                    <xAxis>
+                                                                      <NumberAxis side="BOTTOM" fx:id="xAxisParticleDistrib" />
+                                                                    </xAxis>
+                                                                    <yAxis>
+                                                                      <NumberAxis fx:id="yAxisParticleDistrib" side="LEFT" />
+                                                                    </yAxis>
+                                                                  </LineChart>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                </content>
+                                              </Tab>
+                                            </tabs>
+                                          </TabPane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TableView fx:id="tableOutput" layoutX="118.0" prefHeight="155.0" prefWidth="908.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy></TableView>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
