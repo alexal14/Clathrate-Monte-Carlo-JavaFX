@@ -15,7 +15,7 @@
             <Image url="@../resources/sH.png" />
          </image>
       </ImageView>
-      <Text layoutX="21.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monte Carlo Simulation of sH Clathrate Copyright 20014, 2015 Alexander A. Atamas" wrappingWidth="304.97802734375" />
+      <Text layoutX="21.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monte Carlo Simulation of sH Clathrate Copyright 2014, 2015 Alexander A. Atamas" wrappingWidth="304.97802734375" />
       <Button fx:id="btnOk" layoutX="143.0" layoutY="286.0" mnemonicParsing="false" onAction="#handleBtnOk" text="   Ok   " />
    </children>
 </AnchorPane>

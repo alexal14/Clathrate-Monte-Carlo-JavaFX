@@ -2,7 +2,7 @@
 
     Monte Carlo Simulation of sH Clathrate
 
-    Copyright 20014, 2015 Alexander A. Atamas
+    Copyright 2014, 2015 Alexander A. Atamas
     
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

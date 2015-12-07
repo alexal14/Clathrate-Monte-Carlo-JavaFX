@@ -2,7 +2,7 @@
 
     Monte Carlo Simulation of sH Clathrate
 
-    Copyright 20014, 2015 Alexander A. Atamas
+    Copyright 2014, 2015 Alexander A. Atamas
     
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,6 +36,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.xml.bind.JAXBException;
 
 import org.jmol.adapter.smarter.SmarterJmolAdapter;
 import org.jmol.api.JmolViewer;
@@ -117,6 +119,7 @@ public class RootLayoutController implements Initializable{
     private int numbOfMols = 272;
     private int numbOfAtoms = 272*3;
 
+    private UserData userData;
     
     @FXML
     private BorderPane borderPaneJMol;
@@ -201,11 +204,20 @@ public class RootLayoutController implements Initializable{
 		
 		btnSimulationStop.setDisable(true);		
 		radiobtnNPT.requestFocus();
-		textfieldTemperature.setText("200.0");
-		textfieldPressure.setText("1.0");
-		textfieldFrequency.setText("2000");
-		textfieldNumbOfMCSteps.setText("250000");
 		
+        userData = new UserData(true,200.0,1.0,2500,250000);
+        
+        try {
+            //Unmarshalling: Converting XML content to Java objects
+            userData = JAXBHandler.unmarshal(new File("./input_files/userdata.xml"));
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        } 
+        
+		textfieldTemperature.setText(Double.toString(userData.getTemperature()));
+		textfieldPressure.setText(Double.toString(userData.getPressure()));
+		textfieldFrequency.setText(Integer.toString(userData.getFrequency()));
+		textfieldNumbOfMCSteps.setText(Integer.toString(userData.getNumbOfMCSteps()));
 		
 		comboboxWater.getItems().addAll(new KeyValuePair(272, "TIP3P"),
                 						new KeyValuePair(272, "SPC/E")
@@ -843,6 +855,7 @@ public class RootLayoutController implements Initializable{
             dialogStage.initOwner(mainApp.getPrimaryStage());
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
 
             // Set the persons into the controller.
             AboutDialogController controller = loader.getController();
@@ -852,6 +865,32 @@ public class RootLayoutController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void saveUserSettings(){
+    	
+        try {
+        	
+    		double temperature = Double.parseDouble(textfieldTemperature.getText());
+    		double pressure = Double.parseDouble(textfieldPressure.getText());
+    		int outputFrequency = Integer.parseInt(textfieldFrequency.getText());
+    		int numbMC = Integer.parseInt(textfieldNumbOfMCSteps.getText());
+        	
+        	userData.setEnsembleNPT(true);
+        	userData.setTemperature(temperature);
+        	userData.setPressure(pressure);
+        	userData.setFrequency(outputFrequency);
+        	userData.setNumbOfMCSteps(numbMC);
+        	
+            //Marshalling: Writing Java object to XML file
+            JAXBHandler.marshal(userData, new File("./input_files/userdata.xml"));
+         
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    	
     }
     
 }
