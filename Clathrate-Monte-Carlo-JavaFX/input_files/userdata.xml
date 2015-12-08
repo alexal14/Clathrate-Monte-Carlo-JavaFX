@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<userdata ensembleNPT="true">
+    <temperature>350.0</temperature>
+    <pressure>1.1</pressure>
+    <frequency>2000</frequency>
+    <numbOfMCSteps>250000</numbOfMCSteps>
+</userdata>
